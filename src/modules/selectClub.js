@@ -6,7 +6,7 @@ const selectClub = () => {
 
     headerMain.addEventListener('click', (event) => {
         const target = event.target.closest('.club-select');
-        if(target && clubsList.style.display === 'none') {
+        if(target) {
             clubsList.style.display = 'block';
         } else {
             clubsList.style.display = 'none';

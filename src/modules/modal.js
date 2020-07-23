@@ -2,38 +2,47 @@
 
 const modal = () => {
     const freeVisitForm = document.getElementById('free_visit_form'),
-        formWrapper = freeVisitForm.querySelector('.form-wrapper');
+        formWrapperFreeVisit = freeVisitForm.querySelector('.form-wrapper'),
+        callbackForm = document.getElementById('callback_form'),
+        formWrapperCallback = callbackForm.querySelector('.form-wrapper');
 
-    
     let count = 0;
-    formWrapper.style.top = '-400px';
 
-    const popupAnim = () => {
-        count++;
-        freeVisitForm.style.display = 'block';
-        formWrapper.style.top = count + 'vh';
-        let rafID = requestAnimationFrame(popupAnim);
-        if(count >= 20) {
-            cancelAnimationFrame(rafID);
-        }
+    const popupAnim = (popupBlock, formWrap) => {
+        const anim = () => {
+            count++;
+            popupBlock.style.display = 'block';
+            formWrap.style.top = count + 'vh';
+            let rafID = requestAnimationFrame(anim);
+            if(count >= 20) {
+                cancelAnimationFrame(rafID);
+            }
+        };
+        anim();
     };
 
-    const closePupop = () => {
+    const closePupop = (popupBLock) => {
         count = 0;
-        formWrapper.style.top = '-400px';
-        freeVisitForm.style.display = 'none';
+        popupBLock.style.display = 'none';
     };
 
     document.body.addEventListener('click', (event) => {
-        event.preventDefault();
         let target = event.target,
             openPopupBtn = target.closest('.open-popup'),
-            formContent= target.closest('.form-content');
+            formContent= target.closest('.form-content'),
+            callbackBtn = target.closest('.callback-btn');
 
         if(openPopupBtn) {
-            popupAnim();
+            event.preventDefault();
+            popupAnim(freeVisitForm, formWrapperFreeVisit);
         } else if(!formContent) {
-            closePupop();
+            closePupop(freeVisitForm);
+        }
+
+        if(callbackBtn) {
+            popupAnim(callbackForm, formWrapperCallback);
+        } else if(!formContent) {
+            closePupop(callbackForm);
         }
     });
 };

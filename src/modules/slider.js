@@ -5,7 +5,8 @@ const slider = () => {
         mainSliderSlides = mainSlider.querySelectorAll('.slide');
 
     let sliderIndex = 0,
-        animateCount = -400;
+        animateCount = -400,
+        intervalID = '';
 
     const slideAnimate = () => {
         animateCount+= 20;
@@ -28,10 +29,20 @@ const slider = () => {
     };
 
     const startSlider = (timer = 1000) => {
-        setInterval(playSlider, timer);
+        intervalID = setInterval(playSlider, timer);
     };
 
-    startSlider(5000);
+    const stopSlider = () => {
+        clearInterval(intervalID);
+    };
+
+    window.addEventListener('blur', () => {
+        stopSlider();
+    });
+
+    window.addEventListener('focus', () => {
+        startSlider(5000);
+    });
 };
 
 export default slider;

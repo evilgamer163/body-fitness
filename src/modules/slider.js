@@ -7,11 +7,12 @@ const slider = () => {
     let sliderIndex = 0,
         animateCount = -400,
         intervalID = '';
+        let rafID;
 
     const slideAnimate = () => {
         animateCount+= 20;
         mainSliderSlides[sliderIndex].style.left = animateCount + 'px';
-        let rafID = requestAnimationFrame(slideAnimate);
+        rafID = requestAnimationFrame(slideAnimate);
         if(animateCount >= 0) {
             animateCount = -400;
             cancelAnimationFrame(rafID);
@@ -20,6 +21,7 @@ const slider = () => {
 
     const playSlider = () => {
         mainSliderSlides[sliderIndex].style.display = 'none';
+        cancelAnimationFrame(rafID);
         sliderIndex++;
         if(sliderIndex >= mainSliderSlides.length) {
             sliderIndex = 0;
@@ -32,23 +34,7 @@ const slider = () => {
         intervalID = setInterval(playSlider, timer);
     };
 
-    const stopSlider = () => {
-        clearInterval(intervalID);
-    };
-
-    window.addEventListener('focus', (event) => {
-        event.preventDefault();
-        startSlider(5000);
-    });
-    window.addEventListener('blur', (event) => {
-        stopSlider();
-    });
-
-    // window.addEventListener('blur', () => {
-    //     stopSlider();
-    // });
-
-    // startSlider();
+    startSlider(5000);
 };
 
 export default slider;

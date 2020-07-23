@@ -36,13 +36,19 @@ const slider = () => {
         clearInterval(intervalID);
     };
 
-    window.addEventListener('blur', () => {
+    window.addEventListener('focus', (event) => {
+        event.preventDefault();
+        startSlider(5000);
+    });
+    window.addEventListener('blur', (event) => {
         stopSlider();
     });
 
-    window.addEventListener('focus', () => {
-        startSlider(5000);
-    });
+    // window.addEventListener('blur', () => {
+    //     stopSlider();
+    // });
+
+    // startSlider();
 };
 
 export default slider;

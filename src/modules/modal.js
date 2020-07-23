@@ -5,8 +5,13 @@ const modal = () => {
         formWrapperFreeVisit = freeVisitForm.querySelector('.form-wrapper'),
         callbackForm = document.getElementById('callback_form'),
         formWrapperCallback = callbackForm.querySelector('.form-wrapper'),
-        gift = document.getElementById('gift'),
+        gift = document.getElementById('gift');
+
+    let giftWrapper = '';
+
+    if(gift) {
         giftWrapper = gift.querySelector('.form-wrapper');
+    }
 
     let count = 0;
 

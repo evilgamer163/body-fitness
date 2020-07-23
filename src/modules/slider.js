@@ -6,8 +6,7 @@ const slider = () => {
 
     let sliderIndex = 0,
         animateCount = -400,
-        intervalID = '';
-        let rafID;
+        rafID;
 
     const slideAnimate = () => {
         animateCount+= 20;
@@ -31,7 +30,7 @@ const slider = () => {
     };
 
     const startSlider = (timer = 1000) => {
-        intervalID = setInterval(playSlider, timer);
+        setInterval(playSlider, timer);
     };
 
     startSlider(5000);

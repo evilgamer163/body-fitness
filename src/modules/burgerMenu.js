@@ -10,6 +10,14 @@ const burgerMenu = () => {
         if(document.body.clientWidth <= 768) {
             textMenu.style.display = 'none';
             burgerMenuBtn.style.display = 'block';
+
+            window.addEventListener('scroll', () => {
+                if(window.pageYOffset >= 124) {
+                    topMenu.style.position = 'fixed';
+                } else {
+                    topMenu.style.position = '';
+                }
+            });
         } else {
             textMenu.style.display = 'flex';
             burgerMenuBtn.style.display = 'none';

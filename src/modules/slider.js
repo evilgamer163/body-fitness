@@ -8,6 +8,14 @@ const slider = () => {
         animateCount = -400,
         rafID;
 
+    const nextSlide = (slide, slideIndex) => {
+        slide[slideIndex].style.display = 'flex';
+    };
+
+    const prevSlide = (slide, slideIndex) => {
+        slide[slideIndex].style.display = 'none';
+    };
+
     const slideAnimate = () => {
         animateCount+= 20;
         mainSliderSlides[sliderIndex].style.left = animateCount + 'px';
@@ -19,13 +27,13 @@ const slider = () => {
     };
 
     const playSlider = () => {
-        mainSliderSlides[sliderIndex].style.display = 'none';
+        prevSlide(mainSliderSlides, sliderIndex);
         cancelAnimationFrame(rafID);
         sliderIndex++;
         if(sliderIndex >= mainSliderSlides.length) {
             sliderIndex = 0;
         }
-        mainSliderSlides[sliderIndex].style.display = 'flex';
+        nextSlide(mainSliderSlides, sliderIndex);
         slideAnimate();
     };
 

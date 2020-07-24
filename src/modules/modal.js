@@ -58,7 +58,9 @@ const modal = () => {
             popupAnim(gift, giftWrapper);
             fixedGift.remove();
         } else if(!formContent || closePopupBtn) {
-            closePupop(gift);
+            if(gift) {
+                closePupop(gift);
+            }
         }
     });
 };

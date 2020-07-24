@@ -7,6 +7,8 @@ const gallerySlides = () => {
         pointsBLock = document.querySelector('.points'),
         points = pointsBLock.querySelectorAll('.point');
 
+    console.log(gallerySliderSlides);
+
     let sliderIndex = 0,
         intervalID;
 
@@ -69,7 +71,7 @@ const gallerySlides = () => {
     const playSlider = () => {
         prevSlide(gallerySliderSlides, sliderIndex);
         sliderIndex++;
-        if(sliderIndex >= gallerySliderSlides.length) {
+        if(sliderIndex >= gallerySliderSlides.length - 1) {
             sliderIndex = 0;
         }
         nextSlide(gallerySliderSlides, sliderIndex);
@@ -83,8 +85,9 @@ const gallerySlides = () => {
         if(leftArrow) {
             prevSlide(gallerySliderSlides, sliderIndex);
             sliderIndex--;
-            if(sliderIndex <= 0) {
+            if(sliderIndex < 0) {
                 sliderIndex = gallerySliderSlides.length - 1;
+                console.log(sliderIndex);
             }
             nextSlide(gallerySliderSlides, sliderIndex);
         }

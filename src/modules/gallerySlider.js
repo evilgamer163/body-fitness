@@ -7,8 +7,6 @@ const gallerySlides = () => {
         pointsBLock = document.querySelector('.points'),
         points = pointsBLock.querySelectorAll('.point');
 
-    console.log(gallerySliderSlides);
-
     let sliderIndex = 0,
         intervalID;
 
@@ -18,6 +16,7 @@ const gallerySlides = () => {
             height: 5px;
             background-color: #fff;
             border-radius: 5px;
+            cursor: pointer;
         `;
     });
     points[0].style.cssText += 'background-color: #f4c71b';
@@ -80,7 +79,8 @@ const gallerySlides = () => {
     galleryWrap.addEventListener('click', (event) => {
         let target = event.target,
             leftArrow = target.closest('.left-arrow'),
-            rightArrow = target.closest('.right-arrow');
+            rightArrow = target.closest('.right-arrow'),
+            point = target.closest('.point');
 
         if(leftArrow) {
             prevSlide(gallerySliderSlides, sliderIndex);
@@ -99,6 +99,14 @@ const gallerySlides = () => {
             }
             nextSlide(gallerySliderSlides, sliderIndex);
         }
+
+        points.forEach( (item, i) => {
+            if(point === item) {
+                prevSlide(gallerySliderSlides, sliderIndex);
+                sliderIndex = i;
+                nextSlide(gallerySliderSlides, sliderIndex);
+            }
+        });
     });
 
     gallerySliderSlides.forEach( item => {
@@ -117,12 +125,10 @@ const gallerySlides = () => {
     galleryWrap.addEventListener('mouseover', (event) => {
         let target = event.target,
             leftArrow = target.closest('.left-arrow'),
-            rightArrow = target.closest('.right-arrow');
+            rightArrow = target.closest('.right-arrow'),
+            point = target.closest('.point');
 
-        if(leftArrow) {
-            stopSlider();
-        }
-        if(rightArrow) {
+        if(leftArrow || rightArrow || point) {
             stopSlider();
         }
     });
@@ -130,12 +136,10 @@ const gallerySlides = () => {
     galleryWrap.addEventListener('mouseout', (event) => {
         let target = event.target,
             leftArrow = target.closest('.left-arrow'),
-            rightArrow = target.closest('.right-arrow');
+            rightArrow = target.closest('.right-arrow'),
+            point = target.closest('.point');
 
-        if(leftArrow) {
-            startSlider(5000);
-        }
-        if(rightArrow) {
+        if(leftArrow || rightArrow || point) {
             startSlider(5000);
         }
     });

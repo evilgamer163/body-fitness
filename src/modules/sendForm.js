@@ -116,7 +116,7 @@ const sendForm = () => {
             };
 
             const getData = (data) => {
-                return fetch('./server.php', {
+                return fetch('./sever.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'multipart/form-data'},
                     body: JSON.stringify(data)
@@ -135,11 +135,7 @@ const sendForm = () => {
                     }
                 })
                 .catch((error) => {
-                    if(item.id === 'form1' || item.id === 'form2') {
-                        modalOutputMsg(errorMessage);
-                    } else {
-                        outputMessage(errorMessage);
-                    }
+                    outputMessage(errorMessage);
                     console.error(error);
                 });
             

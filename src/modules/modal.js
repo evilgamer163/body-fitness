@@ -48,7 +48,8 @@ const modal = () => {
             closePupop(freeVisitForm);
         }
 
-        if(callbackBtn) {
+        if(callbackBtn && callbackBtn.form === null) {
+            console.dir(callbackBtn);
             popupAnim(callbackForm, formWrapperCallback);
         } else if(!formContent || closePopupBtn) {
             closePupop(callbackForm);

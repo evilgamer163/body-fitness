@@ -9,7 +9,41 @@ const sendForm = () => {
         successMessage = 'Мы обязательно с вами свяжемся!',
         checkMessage = 'Необходимо принять условия!',
         thanksPopup = document.getElementById('thanks'),
-        laoded = document.querySelector('.loaded');
+        laoded = document.querySelector('.loaded'),
+        footerLetoMozaika = document.getElementById('footer_leto_mozaika'),
+        footerLetoSchelkovo = document.getElementById('footer_leto_schelkovo'),
+        clubs = document.querySelector('.choose-club'),
+        mozLabel = clubs.querySelector(`label[for="${footerLetoMozaika.id}"]`),
+        shelkLabel = clubs.querySelector(`label[for="${footerLetoSchelkovo.id}"]`);
+
+    const checkedClub = (moz, shelk) => {
+        const mozClub = {
+            name: mozLabel.querySelector('h6').textContent,
+            adres: mozLabel.querySelector('p').textContent
+        };
+    
+        const shelkClub ={
+            name: shelkLabel.querySelector('h6').textContent,
+            adres: shelkLabel.querySelector('p').textContent
+        };
+    
+        footerLetoMozaika.setAttribute('checked', '');
+        footerLetoMozaika.setAttribute('value', `${JSON.stringify(mozClub)}`);
+
+        moz.addEventListener('change', () => {
+            moz.setAttribute('checked', '');
+            moz.setAttribute('value', `${JSON.stringify(mozClub)}`);
+            shelk.removeAttribute('checked');
+        });
+
+        shelk.addEventListener('change', () => {
+            shelk.setAttribute('checked', '');
+            shelk.setAttribute('value', `${JSON.stringify(shelkClub)}`);
+            moz.removeAttribute('checked');
+        });
+    };
+
+    checkedClub(footerLetoMozaika, footerLetoSchelkovo);
 
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = `
@@ -53,16 +87,13 @@ const sendForm = () => {
 
         item.addEventListener('submit', (event) => {
             event.preventDefault();
-            laoded.style.display = 'block';
 
             let target = event.target,
                 checkInput = item.querySelector('input[type="checkbox"]'),
                 inputText = item.querySelector('input[type="text"]'),
                 inputTel = item.querySelector('input[type="tel"]');
 
-            
-
-            if(inputText.value === '' || inputTel.value === '') {
+            if((inputText && inputText.value === '') || inputTel.value === '') {
                 item.append(statusMessage);
                 statusMessage.textContent = 'Необходимо заполнить все поля!';
                 setTimeout(() => {
@@ -71,7 +102,7 @@ const sendForm = () => {
                 return;
             }
 
-            if(!checkInput.checked) {
+            if(checkInput && !checkInput.checked) {
                 item.append(statusMessage);
                 statusMessage.textContent = checkMessage;
                 setTimeout(() => {
@@ -79,6 +110,8 @@ const sendForm = () => {
                 }, 5000);
                 return;
             }
+
+            laoded.style.display = 'block';
 
             const formData = new FormData(item);
 
@@ -98,6 +131,10 @@ const sendForm = () => {
                         price: cost,
                         frost: frost 
                     };
+                }
+
+                if(key === 'club-name') {
+                    formData[key] = JSON.parse(val);
                 }
             });
 

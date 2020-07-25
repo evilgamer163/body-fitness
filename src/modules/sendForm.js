@@ -12,7 +12,8 @@ const sendForm = () => {
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = `
         font-size: 20px;
-        color: #fff;
+        color: red;
+        text-align: center;
     `;
 
     thanksPopup.addEventListener('click', (event) => {
@@ -69,9 +70,24 @@ const sendForm = () => {
             }
 
             const formData = new FormData(item);
-            
+
             formData.forEach( (val, key) => {
                 formData[key] = val;
+                if(key === 'card-type') {
+                    let card = item.querySelector(`input[value="${val}"]`),
+                        label = document.querySelector(`label[for="${card.id}"]`),
+                        month = label.querySelector('.long').textContent,
+                        solo = label.querySelector('.solo').textContent === "- дневная -" ? false : true,
+                        cost = label.querySelector('.cost').textContent,
+                        frost = label.querySelector('.frost').textContent === "* Без заморозки" ? true : false;
+                    
+                    formData[key] = {
+                        month: month,
+                        solo: solo,
+                        price: cost,
+                        frost: frost 
+                    };
+                }
             });
 
             const outputMessage = (msg) => {

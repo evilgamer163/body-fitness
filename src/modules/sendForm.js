@@ -53,7 +53,6 @@ const sendForm = () => {
 
         item.addEventListener('submit', (event) => {
             event.preventDefault();
-
             laoded.style.display = 'block';
 
             let target = event.target,
@@ -108,6 +107,14 @@ const sendForm = () => {
                 thanksPopup.style.display = 'block';
             };
 
+            const modalOutputMsg = (msg) => {
+                laoded.style.display = 'none';
+                item.textContent = '';
+                statusMessage.style.cssText += 'color: #fff; margin-top: 40%';
+                statusMessage.textContent = msg;
+                item.append(statusMessage);
+            };
+
             const getData = (data) => {
                 return fetch('./server.php', {
                     method: 'POST',
@@ -121,10 +128,18 @@ const sendForm = () => {
                     if(response.status !== 200) {
                         throw new Error('Ошибка! Статус не равен 200!');
                     }
-                    outputMessage(successMessage);
+                    if(item.id === 'form1' || item.id === 'form2') {
+                        modalOutputMsg(successMessage);
+                    } else {
+                        outputMessage(successMessage);
+                    }
                 })
                 .catch((error) => {
-                    outputMessage(errorMessage);
+                    if(item.id === 'form1' || item.id === 'form2') {
+                        modalOutputMsg(errorMessage);
+                    } else {
+                        outputMessage(errorMessage);
+                    }
                     console.error(error);
                 });
             

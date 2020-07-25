@@ -116,7 +116,7 @@ const sendForm = () => {
             };
 
             const getData = (data) => {
-                return fetch('./sever.php', {
+                return fetch('./server.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'multipart/form-data'},
                     body: JSON.stringify(data)

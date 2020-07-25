@@ -79,7 +79,7 @@ const sendForm = () => {
                         month = label.querySelector('.long').textContent,
                         solo = label.querySelector('.solo').textContent === "- дневная -" ? false : true,
                         cost = label.querySelector('.cost').textContent,
-                        frost = label.querySelector('.frost').textContent === "* Без заморозки" ? true : false;
+                        frost = label.querySelector('.frost').textContent === "* Без заморозки" ? false : true;
                     
                     formData[key] = {
                         month: month,

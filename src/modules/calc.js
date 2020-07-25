@@ -10,48 +10,40 @@ const calc = () => {
         inputsCalc = cardOrder.querySelectorAll('input'),
         promo = document.querySelector('input[placeholder="Промокод"]');
 
-    let test = document.querySelector('label[for="m1"]');
-    console.log(test);
-
     priceTotal.textContent = '1990';
 
-    const removeCheck = (item) => {
-        item.removeAttribute('checked');
-    };
-
     inputsCalc.forEach( item => {
-        item.addEventListener('change', (event) => {
-            let target = event.target,
-                oneMonth = target.closest('#m1'),
-                sixMonth = target.closest('#m2'),
-                nineMonth = target.closest('#m3'),
-                twelveMonth = target.closest('#m4');
-
+        item.addEventListener('change', () => {
             if(checkMozaika.checked) {
-                priceTotal.textContent = '1990';
-
-                if(oneMonth) {
-                    priceTotal.textContent = '1990';
-                } else if(sixMonth) {
-                    priceTotal.textContent = '9990';
-                } else if(nineMonth) {
-                    priceTotal.textContent = '13990';
-                } else if(twelveMonth) {
-                    priceTotal.textContent = '19990';
-                }
+                period.forEach( item => {
+                    if(item.checked) {
+                        if(item.value === '1') {
+                            priceTotal.textContent = '1990';
+                        } else if(item.value === '6') {
+                            priceTotal.textContent = '9990';
+                        } else if(item.value === '9') {
+                            priceTotal.textContent = '13990';
+                        } else if(item.value === '12') {
+                            priceTotal.textContent = '19990';
+                        }
+                    }
+                });
             }
-            if(checkShelkovo.checked) {
-                priceTotal.textContent = '2990';
 
-                if(oneMonth) {
-                    priceTotal.textContent = '2990';
-                } else if(sixMonth) {
-                    priceTotal.textContent = '14990';
-                } else if(nineMonth) {
-                    priceTotal.textContent = '21990';
-                } else if(twelveMonth) {
-                    priceTotal.textContent = '24990';
-                }
+            if(checkShelkovo.checked) {
+                period.forEach( item => {
+                    if(item.checked) {
+                        if(item.value === '1') {
+                            priceTotal.textContent = '2990';
+                        } else if(item.value === '6') {
+                            priceTotal.textContent = '14990';
+                        } else if(item.value === '9') {
+                            priceTotal.textContent = '21990';
+                        } else if(item.value === '12') {
+                            priceTotal.textContent = '24990';
+                        }
+                    }
+                });
             }
 
             if(promo.value === 'ТЕЛО2019') {

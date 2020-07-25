@@ -14,6 +14,7 @@ const sendForm = () => {
         font-size: 20px;
         color: red;
         text-align: center;
+        margin-top: 10px;
     `;
 
     thanksPopup.addEventListener('click', (event) => {
@@ -40,7 +41,7 @@ const sendForm = () => {
             event.preventDefault();
             let target = event.target;
 
-            if(target.type === 'text' && !regExpText.test(target.value)) {
+            if((target.type === 'text' && target.placeholder !== 'Промокод') && !regExpText.test(target.value)) {
                 target.value = '';
                 target.style.border = '2px solid red';
             } else {

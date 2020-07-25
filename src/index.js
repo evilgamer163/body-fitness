@@ -7,6 +7,7 @@ import burgerMenu from './modules/burgerMenu';
 import gallerySlider from './modules/gallerySlider';
 import scroll from './modules/scroll';
 import calc from './modules/calc';
+import sendForm from './modules/sendForm';
 
 selectClub();
 modal();
@@ -15,3 +16,4 @@ burgerMenu();
 gallerySlider();
 scroll();
 calc();
+sendForm();

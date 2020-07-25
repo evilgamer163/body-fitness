@@ -2,19 +2,23 @@
 
 const calc = () => {
     const timeMonthes = document.querySelector('.time'),
-        period = timeMonthes.querySelectorAll('input[type="radio"]'),
         checkShelkovo = document.getElementById('card_leto_schelkovo'),
         checkMozaika = document.getElementById('card_leto_mozaika'),
-        priceTotal = document.getElementById('price-total'),
         cardOrder = document.getElementById('card_order'),
         inputsCalc = cardOrder.querySelectorAll('input'),
         promo = document.querySelector('input[placeholder="Промокод"]');
 
-    priceTotal.textContent = '1990';
+    let period, priceTotal;
+
+    if(timeMonthes) {
+        period = timeMonthes.querySelectorAll('input[type="radio"]');
+        priceTotal = document.getElementById('price-total');
+        priceTotal.textContent = '1990';
+    }
 
     inputsCalc.forEach( item => {
         item.addEventListener('change', () => {
-            if(checkMozaika.checked) {
+            if(checkMozaika && checkMozaika.checked) {
                 period.forEach( item => {
                     if(item.checked) {
                         if(item.value === '1') {
@@ -30,7 +34,7 @@ const calc = () => {
                 });
             }
 
-            if(checkShelkovo.checked) {
+            if(checkShelkovo && checkShelkovo.checked) {
                 period.forEach( item => {
                     if(item.checked) {
                         if(item.value === '1') {
@@ -46,7 +50,7 @@ const calc = () => {
                 });
             }
 
-            if(promo.value === 'ТЕЛО2019') {
+            if(promo && promo.value === 'ТЕЛО2019') {
                 priceTotal.textContent -= (priceTotal.textContent * 0.3);
             }
         });

@@ -1,13 +1,15 @@
+//Отправка форм "Записаться на бесплатный визит" + "Выбрать карту"(страницы клубов)
+
 'use strict';
 
 const sendForm = () => {
     const forms = document.querySelectorAll('form'),
         regExpText = /^[а-яА-Я]+$/,
-        loadMessage = 'Идет отправка...',
         errorMessage = 'Упс! Что то пошло не так...',
         successMessage = 'Мы обязательно с вами свяжемся!',
         checkMessage = 'Необходимо принять условия!',
-        thanksPopup = document.getElementById('thanks');
+        thanksPopup = document.getElementById('thanks'),
+        laoded = document.querySelector('.loaded');
 
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = `
@@ -51,6 +53,9 @@ const sendForm = () => {
 
         item.addEventListener('submit', (event) => {
             event.preventDefault();
+
+            laoded.style.display = 'block';
+
             let target = event.target,
                 checkInput = item.querySelector('input[type="checkbox"]'),
                 inputText = item.querySelector('input[type="text"]'),
@@ -92,6 +97,7 @@ const sendForm = () => {
             });
 
             const outputMessage = (msg) => {
+                laoded.style.display = 'none';
                 thanksPopup.querySelector('p').textContent = msg;
                 thanksPopup.style.display = 'block';
             };
@@ -115,6 +121,14 @@ const sendForm = () => {
                     outputMessage(errorMessage);
                     console.error(error);
                 });
+            
+            setTimeout(() => {
+                thanksPopup.style.display = 'none';
+            }, 5000);
+
+            let inputs = item.querySelectorAll('input').forEach( item => {
+                item.value = '';
+            });
         });
     });
 };

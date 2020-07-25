@@ -8,6 +8,7 @@ import gallerySlider from './modules/gallerySlider';
 import scroll from './modules/scroll';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
+import maskPhone from './modules/maskPhone';
 
 selectClub();
 modal();
@@ -17,3 +18,4 @@ gallerySlider();
 scroll();
 calc();
 sendForm();
+maskPhone();

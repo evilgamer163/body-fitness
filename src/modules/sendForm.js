@@ -66,12 +66,18 @@ const sendForm = () => {
             if(inputText.value === '' || inputTel.value === '') {
                 item.append(statusMessage);
                 statusMessage.textContent = 'Необходимо заполнить все поля!';
+                setTimeout(() => {
+                    statusMessage.textContent = '';
+                }, 5000);
                 return;
             }
 
             if(!checkInput.checked) {
                 item.append(statusMessage);
                 statusMessage.textContent = checkMessage;
+                setTimeout(() => {
+                    statusMessage.textContent = '';
+                }, 5000);
                 return;
             }
 

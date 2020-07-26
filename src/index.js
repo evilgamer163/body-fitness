@@ -9,6 +9,7 @@ import scroll from './modules/scroll';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
+import turnaboutSlider from './modules/turnaboutSlider';
 
 selectClub();
 modal();
@@ -19,3 +20,4 @@ scroll();
 calc();
 sendForm();
 maskPhone();
+turnaboutSlider();

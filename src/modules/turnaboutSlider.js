@@ -95,7 +95,7 @@ const turnaboutSlider = () => {
                     overflow: hidden !important;
                 }
                 .glo-slider__wrap {
-                    
+                    padding: 0px !important;
                     display: flex !important;
                     transition: transform 0.5s !important;
                     will-change: transform !important;

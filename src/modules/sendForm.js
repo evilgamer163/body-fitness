@@ -1,5 +1,3 @@
-//Отправка форм "Записаться на бесплатный визит" + "Выбрать карту"(страницы клубов)
-
 'use strict';
 
 const sendForm = () => {
@@ -15,6 +13,16 @@ const sendForm = () => {
         clubs = document.querySelector('.choose-club'),
         mozLabel = clubs.querySelector(`label[for="${footerLetoMozaika.id}"]`),
         shelkLabel = clubs.querySelector(`label[for="${footerLetoSchelkovo.id}"]`);
+
+    const clearInput = () => {
+        let input = document.querySelectorAll('input');
+
+        input.forEach( item => {
+            if(item.type === 'text' || item.type === 'tel') {
+                item.value = '';
+            }
+        });
+    };
 
     const checkedClub = (moz, shelk) => {
         const mozClub = {
@@ -42,7 +50,6 @@ const sendForm = () => {
             moz.removeAttribute('checked');
         });
     };
-
     checkedClub(footerLetoMozaika, footerLetoSchelkovo);
 
     const statusMessage = document.createElement('div');
@@ -117,7 +124,7 @@ const sendForm = () => {
 
             formData.forEach( (val, key) => {
                 formData[key] = val;
-                if(key === 'card-type') {
+                if(key === 'card-type'  && item.className !== 'card-order-main') {
                     let card = item.querySelector(`input[value="${val}"]`),
                         label = document.querySelector(`label[for="${card.id}"]`),
                         month = label.querySelector('.long').textContent,
@@ -133,7 +140,7 @@ const sendForm = () => {
                     };
                 }
 
-                if(key === 'club-name') {
+                if(key === 'club-name' && item.className !== 'card-order-main') {
                     formData[key] = JSON.parse(val);
                 }
             });
@@ -180,9 +187,7 @@ const sendForm = () => {
                 thanksPopup.style.display = 'none';
             }, 5000);
 
-            let inputs = item.querySelectorAll('input').forEach( item => {
-                item.value = '';
-            });
+            clearInput();
         });
     });
 };
